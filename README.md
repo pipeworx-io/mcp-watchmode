@@ -1,0 +1,58 @@
+# mcp-watchmode
+
+Streaming availability across 200+ services: titles, sources, releases.
+
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 250+ live data sources.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `title_search` | Search titles. |
+| `releases` | Recent/upcoming releases. |
+| `list_titles` | Title catalog. |
+
+## Quick Start
+
+Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
+
+```json
+{
+  "mcpServers": {
+    "watchmode": {
+      "url": "https://gateway.pipeworx.io/watchmode/mcp"
+    }
+  }
+}
+```
+
+Or connect to the full Pipeworx gateway for access to all 250+ data sources:
+
+```json
+{
+  "mcpServers": {
+    "pipeworx": {
+      "url": "https://gateway.pipeworx.io/mcp"
+    }
+  }
+}
+```
+
+## Using with ask_pipeworx
+
+Instead of calling tools directly, you can ask questions in plain English:
+
+```
+ask_pipeworx({ question: "your question about Watchmode data" })
+```
+
+The gateway picks the right tool and fills the arguments automatically.
+
+## More
+
+- [All tools and guides](https://github.com/pipeworx-io/examples)
+- [pipeworx.io](https://pipeworx.io)
+
+## License
+
+MIT

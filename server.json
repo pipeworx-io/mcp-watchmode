@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.pipeworx-io/watchmode",
+  "title": "Watchmode",
+  "description": "Streaming availability across 200+ services: titles, sources, releases.",
+  "version": "0.1.0",
+  "websiteUrl": "https://pipeworx.io/packs/watchmode",
+  "repository": {
+    "url": "https://github.com/pipeworx-io/mcp-watchmode",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://gateway.pipeworx.io/watchmode/mcp"
+    }
+  ]
+}
