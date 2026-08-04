@@ -1,16 +1,30 @@
-# mcp-watchmode
+# @pipeworx/watchmode
 
-Watchmode MCP.
+[Watchmode](https://api.watchmode.com/) MCP — streaming availability across 200+ services. Free tier 1000 req/mo.
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 673+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1394+ live data sources.
+
+## Auth
+
+- Platform: `PLATFORM_WATCHMODE_KEY`. BYO: `?_apiKey=…`.
 
 ## Tools
 
-| Tool | Description |
-|------|-------------|
-| `title_search` | Search titles. |
-| `releases` | Recent/upcoming releases. |
-| `list_titles` | Title catalog. |
+- `title_search(search_value, search_field?, types?)` — search titles
+- `title_detail(title_id, append_to_response?)` — title detail (cast, sources, etc.)
+- `title_sources(title_id, regions?)` — streaming sources for a title
+- `title_seasons(title_id)` — seasons (for series)
+- `releases(start_date?, end_date?, limit?, regions?, source_ids?, source_types?, types?, regions_pricing?)` — recent/upcoming releases
+- `list_titles(types?, regions?, source_ids?, source_types?, genres?, networks?, release_date_start?, release_date_end?, sort_by?, page?, limit?)` — title catalog
+- `sources()` — list streaming sources/services
+- `networks()` — list networks
+- `genres()` — list genres
+- `regions()` — supported regions
+- `languages()` — supported languages
+
+## Data source
+
+`https://api.watchmode.com/v1`
 
 ## Quick Start
 
@@ -26,7 +40,7 @@ Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
 }
 ```
 
-Or connect to the full Pipeworx gateway for access to all 673+ data sources:
+Or connect to the full Pipeworx gateway for access to all 1394+ data sources:
 
 ```json
 {
@@ -50,7 +64,7 @@ The gateway picks the right tool and fills the arguments automatically.
 
 ## More
 
-- [All tools and guides](https://github.com/pipeworx-io/examples)
+- [Docs and guides](https://pipeworx.io/docs)
 - [pipeworx.io](https://pipeworx.io)
 
 ## License
