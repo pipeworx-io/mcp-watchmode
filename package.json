@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-watchmode",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Watchmode MCP.",
   "type": "module",
   "main": "src/index.ts",
@@ -26,7 +26,7 @@
     "@cloudflare/workers-types": "^4.20260405.1"
   },
   "pipeworx": {
-    "sourceHash": "v1-4ca55ed6f47ccbede1792e888229451289e87feb270d3be16149799cd47f295b",
-    "sourceCommit": "b0fb3c31386cf0256dcf1e2f1b3440435a87ec35"
+    "sourceHash": "v1-7411201e16ceeee203b071226edb5b2fedb5ac8c1270faab1a2b8672e192d148",
+    "sourceCommit": "2cb50b368da3267446f2b6f6a3ddbd3d0eed3d73"
   }
 }
