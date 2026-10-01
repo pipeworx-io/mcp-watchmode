@@ -1560,7 +1560,7 @@ const tools: McpToolExport['tools'] = [
   {
     name: 'title_search',
     description: 'Search Watchmode for movies and TV shows by name (or IMDb/TMDb ID via search_field); optionally filter by type (movie, tv_series, etc.). Returns Watchmode title IDs.',
-    inputSchema: { type: 'object', properties: { search_value: { type: 'string' }, search_field: { type: 'string' }, types: { type: 'string' } }, required: ['search_value'] },
+    inputSchema: { type: 'object', properties: { search_value: { type: 'string' }, search_field: { type: 'string', enum: ['name', 'imdb_id', 'tmdb_tv_id', 'tmdb_movie_id', 'tmdb_person_id'], description: 'What search_value IS. Defaults to "name". Watchmode REQUIRES this and rejects anything outside the list — notably "title" is not valid.' }, types: { type: 'string' } }, required: ['search_value'] },
   },
   { name: 'title_detail', description: 'Fetch full metadata for a Watchmode title by title_id: title, year, genres, plot, runtime, user rating, cast, and optionally streaming sources via append_to_response.', inputSchema: { type: 'object', properties: { title_id: { type: 'string' }, append_to_response: { type: 'string' } }, required: ['title_id'] } },
   { name: 'title_sources', description: 'Return streaming availability for a Watchmode title_id — which services (Netflix, Hulu, etc.) carry it in which regions, with subscription/rent/buy type and price.', inputSchema: { type: 'object', properties: { title_id: { type: 'string' }, regions: { type: 'string' } }, required: ['title_id'] } },
@@ -1636,8 +1636,27 @@ async function dispatch(name: string, args: Record<string, unknown>): Promise<un
     return v;
   };
   switch (name) {
-    case 'title_search':
-      return get('/search/', pick(['search_value', 'search_field', 'types']));
+    case 'title_search': {
+      // Watchmode made `search_field` MANDATORY and this tool was 100% broken
+      // on every shape we published. Measured live 2026-10-01:
+      //   {search_value:"Breaking Bad"}                   -> 400
+      //   {search_value:"Inception", search_field:"title"} -> 400
+      //   {search_value:"Dune", search_field:"name"}       -> works
+      // Upstream says: `search_field: Invalid option: expected one of
+      // "imdb_id"|"tmdb_tv_id"|"tmdb_movie_id"|"tmdb_person_id"|"name"`.
+      // Note "title" -- the obvious guess, and what our own example sent --
+      // is NOT in that list. Both tool-examples entries were invalid, so every
+      // caller following our documentation got a 400.
+      //
+      // Defaulting to 'name' makes the common case ("find me this show") work
+      // with no extra argument, which is what the description already promised.
+      // The enum on the schema is the other half: `check:example-values` can
+      // only validate an argument whose valid set is DECLARED, so without it a
+      // future bad example passes CI exactly as these two did (fleet #2106).
+      const args = pick(['search_value', 'search_field', 'types']);
+      if (!args.search_field) args.search_field = 'name';
+      return get('/search/', args);
+    }
     case 'title_detail':
       return get(`/title/${encodeURIComponent(reqStr('title_id', '"3173903"'))}/details/`, pick(['append_to_response']));
     case 'title_sources':

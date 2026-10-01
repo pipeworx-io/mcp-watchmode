@@ -2,7 +2,7 @@
 
 [Watchmode](https://api.watchmode.com/) MCP — streaming availability across 200+ services. Free tier 1000 req/mo.
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1684+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1687+ live data sources. This is an independent, unofficial integration — not affiliated with, endorsed by, or published by the upstream provider.
 
 ## Auth
 
@@ -70,7 +70,7 @@ directly, instead of just this one's:
 }
 ```
 
-Both URLs reach the same gateway and the same 1684+ data sources. The
+Both URLs reach the same gateway and the same 1687+ data sources. The
 only difference is which pack's tools are listed **directly**; `ask_pipeworx`
 reaches all of them from either one.
 
@@ -79,7 +79,7 @@ reaches all of them from either one.
 ```bash
 curl -X POST https://gateway.pipeworx.io/v1/tools/title_search \
   -H 'Content-Type: application/json' \
-  -d '{"search_value":"Breaking Bad"}'
+  -d '{"search_value":"Breaking Bad","search_field":"name"}'
 ```
 
 No account needed for the first calls. Inspect any tool: `GET https://gateway.pipeworx.io/v1/tools/title_search`. Find one: `POST https://gateway.pipeworx.io/v1/tools/search_packs` with `{"query":"..."}`.
