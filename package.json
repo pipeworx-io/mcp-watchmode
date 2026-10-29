@@ -1,12 +1,20 @@
 {
   "name": "@pipeworx/mcp-watchmode",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Watchmode MCP.",
   "type": "module",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tools.json": "./tools.json",
+    "./package.json": "./package.json"
+  },
   "bin": {
     "mcp-watchmode": "bin/cli.js"
+  },
+  "files": ["bin/", "lib/", "tools.json", "server.json"],
+  "engines": {
+    "node": ">=18"
   },
   "keywords": ["mcp", "mcp-server", "model-context-protocol", "pipeworx", "watchmode"],
   "license": "MIT",
@@ -14,19 +22,12 @@
     "type": "git",
     "url": "git+https://github.com/pipeworx-io/mcp-watchmode.git"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.0",
-    "tsx": "^4.19.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.9.3",
-    "@cloudflare/workers-types": "^4.20260405.1"
-  },
+  "mcpName": "io.github.pipeworx-io/watchmode",
   "pipeworx": {
-    "sourceHash": "v1-32f0ce6866996282cb1e8911d0cc8a919d53f27d18dd88f91f5c7472a0fb2037",
-    "sourceCommit": "6a059aca883e8bfd7869ca8892d720dd93a6b3c0"
+    "mode": "gateway",
+    "slug": "watchmode",
+    "gatewaySlug": "watchmode",
+    "sourceHash": "v1-0247f634ef57e45dbbb14ec75ada579e9a0d3199eeeb0e5092c77c48658b1881",
+    "sourceCommit": "98853f34516646cb7c4c1460f09249b262c0269e"
   }
 }
